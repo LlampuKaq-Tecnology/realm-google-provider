@@ -1,18 +1,28 @@
 {
-  "name": "realm-google-provider",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@llampukaq/realm-google-provider",
+  "version": "0.1.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/realmGoogleProvider/index.js",
+  "typings": "/dist/realmGoogleProvider/index.d.ts",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx tsc -p tsconfig-components.json",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@llampukaq/realm": "^0.1.7",
+    "@react-oauth/google": "^0.11.1",
     "@types/node": "20.5.9",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
+    "cllk": "^1.7.6",
+    "jwt-decode": "^3.1.2",
+    "jwt-encode": "^1.0.1",
+    "nanoid": "^4.0.2",
     "next": "13.4.19",
     "postcss": "8.4.29",
     "react": "18.2.0",
