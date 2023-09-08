@@ -17,11 +17,11 @@ const googleData = {
   name: "",
   picture: "",
 };
-function RealmGoogleButton({
+function RealmGoogleButton<T>({
   onError,
   onSuccess,
 }: {
-  onSuccess?: any;
+  onSuccess?: (user: T, userRealm: any) => void;
   onError?: any;
 }) {
   const app = useApp();
@@ -67,7 +67,7 @@ function RealmGoogleButton({
           );
           login(dataRealm);
           setUserRealm(user);
-          onSuccess?.();
+          onSuccess?.(dataRealm, user);
         }}
         onError={() => {
           onError?.();

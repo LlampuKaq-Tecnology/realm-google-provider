@@ -47,7 +47,7 @@ function RealmGoogleButton({ onError, onSuccess, }) {
                 const dataRealm = yield user.functions.userUsers("create", dataInformacion.email, w);
                 login(dataRealm);
                 setUserRealm(user);
-                onSuccess === null || onSuccess === void 0 ? void 0 : onSuccess();
+                onSuccess === null || onSuccess === void 0 ? void 0 : onSuccess(dataRealm, user);
             }), onError: () => {
                 onError === null || onError === void 0 ? void 0 : onError();
             }, useOneTap: true }) }));
