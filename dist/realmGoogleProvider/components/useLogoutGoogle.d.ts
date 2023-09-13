@@ -1,4 +1,4 @@
 declare function useLogoutGoogle(): {
-    logout: () => void;
+    logout: () => Promise<void>;
 };
 export default useLogoutGoogle;

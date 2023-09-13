@@ -1,13 +1,12 @@
 import { useAuth } from "@llampukaq/realm";
 import { googleLogout } from "@react-oauth/google";
 function useLogoutGoogle() {
-  const { logout: l } = useAuth();
-  const logout = () => {
-    googleLogout();
-    l();
-  };
+  const { logout } = useAuth();
   return {
-    logout,
+    logout: async () => {
+      logout();
+      googleLogout();
+    },
   };
 }
 

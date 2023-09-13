@@ -10,3 +10,4 @@ tailwind.config.ts
 tsconfig-components.json
 .next
 tsconfig.json
+bun.lockb
