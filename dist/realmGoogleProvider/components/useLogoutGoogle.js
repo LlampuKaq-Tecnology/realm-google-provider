@@ -7,14 +7,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { FacebookLoginClient } from "@greatsumini/react-facebook-login";
 import { useAuth } from "@llampukaq/realm";
 import { googleLogout } from "@react-oauth/google";
 function useLogoutGoogle() {
     const { logout } = useAuth();
     return {
         logout: () => __awaiter(this, void 0, void 0, function* () {
-            logout();
-            googleLogout();
+            logout === null || logout === void 0 ? void 0 : logout();
+            googleLogout === null || googleLogout === void 0 ? void 0 : googleLogout();
+            FacebookLoginClient === null || FacebookLoginClient === void 0 ? void 0 : FacebookLoginClient.logout(() => { });
         }),
     };
 }

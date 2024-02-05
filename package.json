@@ -1,10 +1,9 @@
 {
   "name": "@llampukaq/realm-google-provider",
-  "version": "0.1.6",
+  "version": "0.1.73",
   "publishConfig": {
     "access": "public"
   },
-  
   "keywords": [
     "realm",
     "database",
@@ -30,22 +29,26 @@
   },
   "typings": "dist/realmGoogleProvider/index.d.ts",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev ",
     "build": "npx tsc -p tsconfig-components.json",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@greatsumini/react-facebook-login": "^3.3.3",
     "@llampukaq/realm": "^0.2.7",
     "@react-oauth/google": "^0.11.1",
     "jwt-decode": "^3.1.2",
     "jwt-encode": "^1.0.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-facebook": "^9.0.12",
+    "react-social-login-buttons": "^3.9.1",
+    "reactjs-social-login": "^2.6.3"
   },
   "devDependencies": {
-    "@types/react": "^18.2.21",
     "@types/node": "20.5.9",
+    "@types/react": "^18.2.21",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
     "cllk": "^1.8.6",

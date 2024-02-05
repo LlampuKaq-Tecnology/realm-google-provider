@@ -1,5 +1,4 @@
-declare function RealmGoogleButton<T>({ onError, onSuccess, }: {
-    onSuccess?: (user: T, userRealm: any) => void;
-    onError?: any;
+declare function RealmGoogleButton<T>({ appId }: {
+    appId: string;
 }): import("react/jsx-runtime").JSX.Element;
 export default RealmGoogleButton;
