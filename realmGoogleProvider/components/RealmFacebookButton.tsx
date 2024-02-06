@@ -34,26 +34,7 @@ function RealmFacebookButton({
       }}
       className="flex justify-center items-center"
       onSuccess={async (response) => {
-        messagePromise(
-          async () => {
-            const credentials = Credentials.facebook(response.accessToken);
-            const userRealm = await app.logIn(credentials);
-            setS(userRealm);
-            //@ts-ignore
-            setUserRealm(userRealm);
-          },
-          {
-            error: t(
-              "Error al iniciar sesión. Por favor, verifica tus credenciales.",
-              "Error logging in. Please check your credentials."
-            ),
-            pending: t("Iniciando sesión...", "Logging in..."),
-            success: t(
-              "¡Inicio de sesión exitoso! Bienvenido.",
-              "Login successful! Welcome."
-            ),
-          }
-        );
+        setS(response);
       }}
       onFail={(error) => {
         message({
@@ -67,7 +48,9 @@ function RealmFacebookButton({
       onProfileSuccess={async (response) => {
         messagePromise(
           async () => {
-            const dataRealm = await s?.functions.userUsers(
+            const credentials = Credentials.facebook(s.accessToken);
+            const userRealm = await app.logIn(credentials);
+            const dataRealm = await userRealm?.functions.userUsers(
               "create",
               response.email,
               createUserData({
@@ -76,18 +59,19 @@ function RealmFacebookButton({
                 picture: response.picture?.data.url,
               })
             );
-            console.log(dataRealm);
             login(dataRealm);
+            //@ts-ignore
+            setUserRealm(userRealm);
           },
           {
             error: t(
-              "Error al crear el usuario. Intenta nuevamente.",
-              "Error creating user. Please try again."
+              "Error al iniciar sesión. Por favor, verifica tus credenciales.",
+              "Error logging in. Please check your credentials."
             ),
-            pending: t("Creando usuario...", "Creating user..."),
+            pending: t("Iniciando sesión...", "Logging in..."),
             success: t(
-              "¡Usuario creado con éxito!",
-              "User created successfully!"
+              "¡Inicio de sesión exitoso! Bienvenido.",
+              "Login successful! Welcome."
             ),
           }
         );
