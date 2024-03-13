@@ -5,7 +5,7 @@ const nextConfig = {
     cert: "./cert.pem", // Ruta al archivo de certificado
   },
   reactStrictMode: true,
-  transpilePackages: ["@llampukaq/realm", "cllk"],
+  transpilePackages: ["@llampukaq/realm", "cllk", "@llampukaq/icons"],
 };
 
 module.exports = nextConfig;

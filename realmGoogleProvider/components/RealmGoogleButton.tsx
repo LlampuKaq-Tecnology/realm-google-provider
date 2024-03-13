@@ -4,39 +4,51 @@ import {
   useAuth,
   useSetUserRealm,
 } from "@llampukaq/realm";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-import { useMessage, useT } from "cllk";
+import {
+  GoogleLogin,
+  GoogleLoginProps,
+  GoogleOAuthProvider,
+} from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
 import React from "react";
-const googleData = {
-  email: "",
-  email_verified: true,
-  family_name: "",
-  given_name: "",
-  locale: "",
-  name: "",
-  picture: "",
-};
-function RealmGoogleButton<T>({ appId }: { appId: string }) {
+export interface googleData {
+  email: string;
+  email_verified: boolean;
+  family_name: string;
+  given_name: string;
+  locale: string;
+  name: string;
+  picture: string;
+}
+function RealmGoogleButton<T>({
+  appId,
+  onSuccess,
+  //@ts-ignore
+  googleOpt = {
+    type: "icon",
+    shape: "circle",
+    cancel_on_tap_outside: true,
+    theme: "filled_blue",
+  },
+}: {
+  appId: string;
+  googleOpt?: Partial<GoogleLoginProps>;
+  onSuccess?: (fn: () => Promise<any>) => void;
+}) {
   const app = useApp();
   const { setUserRealm } = useSetUserRealm();
   const { login, createUserData } = useAuth();
-  const { messagePromise, message } = useMessage();
-  const { t } = useT();
+
   return (
     <GoogleOAuthProvider clientId={appId}>
       <GoogleLogin
-        type="icon"
-        shape="circle"
-        
-        cancel_on_tap_outside
-        theme="filled_blue"
+        {...googleOpt}
         onSuccess={async (response) => {
-          messagePromise(
-            async () => {
+          if (onSuccess != undefined) {
+            onSuccess?.(async () => {
               const dataInformacion = jwtDecode(
                 response.credential as string
-              ) as typeof googleData;
+              ) as googleData;
 
               const credentials = Credentials.google({
                 idToken: response.credential as string,
@@ -54,23 +66,31 @@ function RealmGoogleButton<T>({ appId }: { appId: string }) {
               login(dataRealm);
               //@ts-ignore
               setUserRealm(userRealm);
-            },
-            {
-              error: t("Error al iniciar sesión.", "Error logging in."),
-              pending: t("Iniciando sesión...", "Logging in..."),
-              success: t("Inicio de sesión exitoso.", "Login successful."),
-            }
-          );
+            });
+          } else {
+            const dataInformacion = jwtDecode(
+              response.credential as string
+            ) as googleData;
+
+            const credentials = Credentials.google({
+              idToken: response.credential as string,
+            });
+            const userRealm = await app.logIn(credentials);
+            const dataRealm = await userRealm.functions.userUsers(
+              "create",
+              dataInformacion.email,
+              createUserData({
+                email: dataInformacion.email,
+                name: dataInformacion.name,
+                picture: dataInformacion.picture,
+              })
+            );
+            login(dataRealm);
+            //@ts-ignore
+            setUserRealm(userRealm);
+          }
         }}
-        onError={() => {
-          message({
-            type: "error",
-            description: t(
-              "Ha ocurrido un error al iniciar sesión.",
-              "An error occurred while logging in."
-            ),
-          });
-        }}
+        onError={() => {}}
       />
     </GoogleOAuthProvider>
   );

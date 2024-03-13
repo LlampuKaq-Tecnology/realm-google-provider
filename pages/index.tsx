@@ -3,12 +3,13 @@ import {
   RealmGoogleButton,
   useLogoutGoogle,
 } from "@/realmGoogleProvider";
-import { useIsLogin, useUser } from "@llampukaq/realm";
-import { Button, H1 } from "cllk";
+import { useIsLogin } from "@llampukaq/realm";
+import { Button, useMessage } from "cllk";
 
 export default function Home() {
   const { isLogin } = useIsLogin();
   const { logout } = useLogoutGoogle();
+  const { messagePromise } = useMessage();
   return (
     <>
       {isLogin ? (
@@ -20,7 +21,17 @@ export default function Home() {
           <RealmFacebookButton appId="2169993853332310">
             <div className="bg-blue-500 p-2 rounded-full">F</div>
           </RealmFacebookButton>
-          <RealmGoogleButton appId={process.env.NEXT_PUBLIC_GOOGLE as string} />
+          <RealmGoogleButton
+            googleOpt={{ size: "large" }}
+            onSuccess={(fn) => {
+              messagePromise(fn, {
+                error: "Error",
+                pending: "Pedings...",
+                success: "Siiu",
+              });
+            }}
+            appId={process.env.NEXT_PUBLIC_GOOGLE as string}
+          />
         </>
       )}
     </>
