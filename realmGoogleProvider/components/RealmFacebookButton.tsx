@@ -20,7 +20,6 @@ function RealmFacebookButton({
   const app = useApp();
   const { setUserRealm } = useSetUserRealm();
   const { login, createUserData } = useAuth();
-
   const [s, setS] = useState<any>();
   return (
     <FacebookLogin
@@ -49,7 +48,6 @@ function RealmFacebookButton({
               createUserData({
                 email: response.email,
                 name: response.name,
-                picture: response.picture?.data.url,
               })
             );
             login(dataRealm);
@@ -65,7 +63,6 @@ function RealmFacebookButton({
             createUserData({
               email: response.email,
               name: response.name,
-              picture: response.picture?.data.url,
             })
           );
           login(dataRealm);

@@ -1,6 +1,6 @@
 {
   "name": "@llampukaq/realm-google-provider",
-  "version": "0.1.772",
+  "version": "0.1.7742",
   "publishConfig": {
     "access": "public"
   },
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@greatsumini/react-facebook-login": "^3.3.3",
-    "@llampukaq/realm": "^0.2.71",
+    "@llampukaq/realm": "^0.2.727",
     "@react-oauth/google": "^0.11.1",
     "cllk": "^2.1.4591",
     "jwt-decode": "^3.1.2",

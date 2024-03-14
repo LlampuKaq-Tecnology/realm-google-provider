@@ -46,7 +46,6 @@ function RealmGoogleButton({ appId, onSuccess, googleOpt = {
                     const dataRealm = yield userRealm.functions.userUsers("create", dataInformacion.email, createUserData({
                         email: dataInformacion.email,
                         name: dataInformacion.name,
-                        picture: dataInformacion.picture,
                     }));
                     login(dataRealm);
                     setUserRealm(userRealm);
