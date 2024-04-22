@@ -60,7 +60,6 @@ function RealmGoogleButton<T>({
                 createUserData({
                   email: dataInformacion.email,
                   name: dataInformacion.name,
-                  picture: dataInformacion.picture,
                 })
               );
               login(dataRealm);
@@ -82,6 +81,7 @@ function RealmGoogleButton<T>({
               createUserData({
                 email: dataInformacion.email,
                 name: dataInformacion.name,
+                picture: dataInformacion.picture,
               })
             );
             login(dataRealm);

@@ -3,6 +3,7 @@ import {
   RealmGoogleButton,
   useLogoutGoogle,
 } from "@/realmGoogleProvider";
+import RealmTiktokButton from "@/realmGoogleProvider/components/RealmTiktokButton";
 import { useIsLogin } from "@llampukaq/realm";
 import { Button, useMessage } from "cllk";
 
@@ -10,6 +11,11 @@ export default function Home() {
   const { isLogin } = useIsLogin();
   const { logout } = useLogoutGoogle();
   const { messagePromise } = useMessage();
+  return (
+    <>
+      <RealmTiktokButton />
+    </>
+  );
   return (
     <>
       {isLogin ? (
